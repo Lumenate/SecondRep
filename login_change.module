@@ -3,43 +3,31 @@
   * Function to build age verification box
   */
 
-function cofirm(&$form) {
-  $form['ageverificationbox'] = array(
+function login_change_verificate(&$form) {
+  $form['age_verification_box'] = array(
     '#type' => 'checkbox', 
-    '#title' => "I am over 18", 
+    '#title' => 'I am over 18',
     '#required' => TRUE,
     '#return_value' => 1,
     '#default_value' => 0,
   );
-  $form['#validate'][] = 'ageverificationbox_validate';
+  $form['#validate'][] = 'login_change_age_verification_box_validate';
 }
 
 /**
-  * Implements hook_user_login()
+  * Implements hook_form_alter()
   */
-function login_change_form_user_login_alter(&$form, &$form_state) {
-  cofirm($form);
+function login_change_form_alter(&$form, &$form_state, $form_id) {
+  if (($form_id == 'user_login') || ($form_id == 'user_login_block') || ($form_id == 'user_register_form')){
+    login_change_verificate($form);
+  }
 }
 
 /**
-  * Implements hook_user_register_form()
-  */
-function login_change_form_user_register_form_alter(&$form, &$form_state) {
-  cofirm($form);
-}
-
-/**
-  * Implements hook_user_register_form()
-  */
-function login_change_form_user_login_block_alter(&$form, &$form_state) {
-  cofirm($form);
-}
-
-/**
-  * Validate function for age verification box 
+  * Validate function for age verification box
   */ 
-function ageverificationbox_validate(&$form, &$form_state) { 
-  if ($form_state['values']['ageverificationbox'] == 0) {
+function login_change_age_verification_box_validate(&$form, &$form_state) {
+  if ($form_state['values']['age_verification_box'] == 0) {
     form_error($form, t('Age not validated.'));
   }
 }
