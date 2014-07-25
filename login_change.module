@@ -1,33 +1,45 @@
 <?php
 /**
-  * Implements hook_user_login()
+  * Function to build confirmation
   */
-function login_change_form_user_login_alter(&$form, &$form_state) {
+
+function cofirm(&$form) {
   $form['confirmation'] = array(
     '#type' => 'checkbox', 
     '#title' => "I am over 18", 
-    '#required' => TRUE
+    '#required' => TRUE,
+    '#return_value' => 1,
+    '#default_value' => 0,
   );
+  $form['#validate'][] = 'confirmation_validate';
+}
+
+/**
+  * Implements hook_user_login()
+  */
+function login_change_form_user_login_alter(&$form, &$form_state) {
+  cofirm($form);
 }
 
 /**
   * Implements hook_user_register_form()
   */
 function login_change_form_user_register_form_alter(&$form, &$form_state) {
-  $form['confirmation'] = array(
-    '#type' => 'checkbox', 
-    '#title' => "I am over 18", 
-    '#required' => TRUE
-  );
+  cofirm($form);
 }
 
 /**
   * Implements hook_user_register_form()
   */
 function login_change_form_user_login_block_alter(&$form, &$form_state) {
-  $form['confirmation'] = array(
-    '#type' => 'checkbox', 
-    '#title' => "I am over 18", 
-    '#required' => TRUE
-  );
+  cofirm($form);
+}
+
+/**
+  * Validate function for internet_lobby_page_form. 
+  */ 
+function confirmation_validate(&$form, &$form_state) { 
+  if ($form['confirmation'] == 0) {
+    form_error($form, t('Age not validated.'));
+  }
 }
