@@ -1,6 +1,6 @@
 <?php
 /**
-  * Function to build confirmation
+  * Function to build age confirmation box
   */
 
 function cofirm(&$form) {
@@ -36,7 +36,7 @@ function login_change_form_user_login_block_alter(&$form, &$form_state) {
 }
 
 /**
-  * Validate function for internet_lobby_page_form. 
+  * Validate function for age confirmation box 
   */ 
 function ageconfirmationbox_validate(&$form, &$form_state) { 
   if ($form_state['values']['ageconfirmationbox'] == 0) {
