@@ -1,0 +1,4 @@
+name = Login change
+description = Custom module that changes login page
+version = 7.x-1.x-dev
+core = 7.x

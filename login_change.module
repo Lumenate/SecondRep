@@ -1,0 +1,33 @@
+<?php
+/**
+  * Implements hook_user_login()
+  */
+function login_change_form_user_login_alter(&$form, &$form_state) {
+  $form['confirmation'] = array(
+    '#type' => 'checkbox', 
+    '#title' => "I am over 18", 
+    '#required' => TRUE
+  );
+}
+
+/**
+  * Implements hook_user_register_form()
+  */
+function login_change_form_user_register_form_alter(&$form, &$form_state) {
+  $form['confirmation'] = array(
+    '#type' => 'checkbox', 
+    '#title' => "I am over 18", 
+    '#required' => TRUE
+  );
+}
+
+/**
+  * Implements hook_user_register_form()
+  */
+function login_change_form_user_login_block_alter(&$form, &$form_state) {
+  $form['confirmation'] = array(
+    '#type' => 'checkbox', 
+    '#title' => "I am over 18", 
+    '#required' => TRUE
+  );
+}
