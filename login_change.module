@@ -1,17 +1,17 @@
 <?php
 /**
-  * Function to build age confirmation box
+  * Function to build age verification box
   */
 
 function cofirm(&$form) {
-  $form['ageconfirmationbox'] = array(
+  $form['ageverificationbox'] = array(
     '#type' => 'checkbox', 
     '#title' => "I am over 18", 
     '#required' => TRUE,
     '#return_value' => 1,
     '#default_value' => 0,
   );
-  $form['#validate'][] = 'ageconfirmationbox_validate';
+  $form['#validate'][] = 'ageverificationbox_validate';
 }
 
 /**
@@ -38,8 +38,8 @@ function login_change_form_user_login_block_alter(&$form, &$form_state) {
 /**
   * Validate function for age confirmation box 
   */ 
-function ageconfirmationbox_validate(&$form, &$form_state) { 
-  if ($form_state['values']['ageconfirmationbox'] == 0) {
+function ageverificationbox_validate(&$form, &$form_state) { 
+  if ($form_state['values']['ageverificationbox'] == 0) {
     form_error($form, t('Age not validated.'));
   }
 }
